@@ -1,1 +1,36 @@
+spring:
+  security:
+    oauth2:
+      authorization-server:
+        client:
+          client-1:
+            registration:
+              client-id: client
+              client-secret: "{noop}secret"
+              client-authentication-methods: client_secret_basic
+              authorization-grant-types:
+                - "client_credentials"
+                - "refresh_token"
+              redirect-uris:
+                - http://127.0.0.1:8080/login/oauth2/code/client
+              post-logout-redirect-uris:
+                - http://127.0.0.1:8080/logout
+              scopes:
+                - "openid"
+                - "profile"
+                - "read"
+                - "write"
 
+            token:
+              access-token-time-to-live: 3600s
+              refresh-token-time-to-live: 7200s
+    user:
+      name: user
+      password: "{noop}secret"
+      roles: USER
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace
