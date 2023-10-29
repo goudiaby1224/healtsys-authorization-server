@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HealtsysAuthorizationServerApplication {
+public class HealthSysAuthorizationServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HealtsysAuthorizationServerApplication.class, args);
+        SpringApplication.run(HealthSysAuthorizationServerApplication.class, args);
     }
 
 }

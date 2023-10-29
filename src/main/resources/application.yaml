@@ -1,4 +1,28 @@
 spring:
+  application:
+    name: health-sys-authorization-resource-server
+  jpa:
+    # Provide database platform that is being used
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      # New database is created when application starts and destroyed when application is stopped
+      ddl-auto: create-drop
+    # Show sql when spring data jpa performs query
+    show-sql: true
+    properties:
+      hibernate:
+        # Format queries
+        format_sql: true
+  datasource:
+    # URL connection to database (spring-security is database name)
+    url: jdbc:h2:mem:spring-security
+    # H2 sql Driver
+    driver-class-name: org.h2.Driver
+    username: root
+    password: 12345
+  h2:
+    console:
+      enabled: true
   security:
     oauth2:
       authorization-server:
@@ -24,13 +48,21 @@ spring:
             token:
               access-token-time-to-live: 3600s
               refresh-token-time-to-live: 7200s
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8083/auth/realms/health-sys
     user:
       name: user
       password: "{noop}secret"
       roles: USER
+
 
 logging:
   level:
     org:
       springframework:
         security: trace
+server:
+  port: 8081
+  servlet:
+    context-path: /resource-server-health-sys-jwt
